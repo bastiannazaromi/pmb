@@ -181,6 +181,28 @@
     <!-- thm custom script -->
     <script src="<?= base_url() ; ?>/assets/vendor/main_html/js/custom.js"></script>
 
+    <script>
+    $('.page-scroll').on('click', function(e) {
+
+        // 
+        var tujuan = $(this).attr('href');
+        // tangkap element ybs
+        var elemenTujuan = $(tujuan);
+        // console.log(elemenTujuan.offset().top);
+
+        // console.log($('html').scrollTop());
+
+        // $('body').scrollTop(elemenTujuan.offset().top);
+
+        $('html').animate({
+            scrollTop: elemenTujuan.offset().top - 50
+        }, 2000, 'easeOutBounce');
+
+        e.preventDefault();
+
+    });
+    </script>
+
 
 </body>
 
