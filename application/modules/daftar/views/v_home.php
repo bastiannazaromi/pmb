@@ -6,29 +6,29 @@
                     <li data-transition="parallaxvertical">
                         <div class="tp-caption sfl tp-resizeme thm-banner-h1" data-x="left" data-hoffset="0"
                             data-y="top" data-voffset="225" data-whitespace="nowrap" data-transform_idle="o:1;"
-                            data-transform_in="o:0" data-transform_out="o:0" data-start="500">
+                            data-transform_in="o:0" data-transform_out="o:0" data-start="200">
                             POLITKNIK HARAPAN BERSAMA
                         </div>
                         <div class="tp-caption sfr tp-resizeme thm-banner-h1 heavy" data-x="left" data-hoffset="0"
                             data-y="top" data-voffset="290" data-whitespace="nowrap" data-transform_idle="o:1;"
-                            data-transform_in="o:0" data-transform_out="o:0" data-start="1000">
+                            data-transform_in="o:0" data-transform_out="o:0" data-start="500">
                             THE TRUE VOCATIONAL CAMPUS
                         </div>
                         <div class="tp-caption sfb tp-resizeme thm-banner-h3" data-x="left" data-hoffset="0"
                             data-y="top" data-voffset="368" data-whitespace="nowrap" data-transform_idle="o:1;"
-                            data-transform_in="o:0" data-transform_out="o:0" data-start="1500">
+                            data-transform_in="o:0" data-transform_out="o:0" data-start="700">
                             Orang Cerdas Kuliah di PHB
                         </div>
 
                         <div class="tp-caption sfl tp-resizeme" data-x="left" data-hoffset="0" data-y="top"
                             data-voffset="505" data-whitespace="nowrap" data-transform_idle="o:1;"
-                            data-transform_in="o:0" data-transform_out="o:0" data-start="2300">
-                            <a href="<?= base_url('daftar/form_daftar') ; ?>" class="thm-btn">Mulai Daftar</a>
+                            data-transform_in="o:0" data-transform_out="o:0" data-start="900">
+                            <a href="<?= base_url('daftar/pendaftaran') ; ?>" class="thm-btn">Mulai Daftar</a>
                         </div>
                         <div class="tp-caption sfr tp-resizeme" data-x="left" data-hoffset="185" data-y="top"
                             data-voffset="505" data-whitespace="nowrap" data-transform_idle="o:1;"
-                            data-transform_in="o:0" data-transform_out="o:0" data-start="2600">
-                            <a href="#biaya" class="thm-btn inverse">Informasi Biaya</a>
+                            data-transform_in="o:0" data-transform_out="o:0" data-start="1100">
+                            <a href="#biaya" class="thm-btn inverse page-scroll">Informasi Biaya</a>
                         </div>
                     </li>
                 </ul>
@@ -38,18 +38,20 @@
 
 </section>
 
-<section class="recent-causes sec-padding" id="biaya" style="background-color: #e6e6e6;">
+<!-- style="background-color: #e6e6e6;" -->
+
+<section class="recent-causes sec-padding" id="biaya">
     <div class="container">
         <div class="sec-title text-center">
-            <h2>Recent Causes</h2>
-            <p>Lorem ipsum is a dummy text it will use for subtitle here</p>
+            <h2>INFORMASI BIAYA KULIAH</h2>
             <span class="decor"><span class="inner"></span></span>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="causes sm-col5-center">
                     <div class="thumb">
-                        <img class="full-width" alt="" src="img/causes/1.jpg">
+                        <img class="full-width" alt=""
+                            src="<?= base_url('assets/vendor/main_html/') ; ?>img/causes/1.jpg">
                         <div class="donate-piechart">
                             <div class="piechart-block">
                                 <div class="piechart style-one" data-fg-color="rgba(250,119,68,1)" data-value=".75">

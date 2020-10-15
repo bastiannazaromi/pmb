@@ -13,6 +13,20 @@
     <!-- responsive stylesheet -->
     <link rel="stylesheet" href="<?= base_url() ; ?>/assets/vendor/main_html/css/responsive.css">
 
+    <style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    </style>
+
 </head>
 
 <body>
@@ -43,24 +57,18 @@
                 <div class="nav-header">
                     <ul>
                         <li>
-                            <a href="<?= base_url('daftar') ; ?>">Home</a>
+                            <a href="<?= base_url('home') ; ?>">Home</a>
                         </li>
                         <li>
-                            <a href="<?= base_url('daftar/form_daftar') ; ?>">Pendaftaran</a>
+                            <a href="<?= base_url('pendaftaran') ; ?>">Pendaftaran</a>
                         </li>
-                        <li><a href="<?= base_url('daftar/about') ; ?>">About</a></li>
-                        <li><a href="<?= base_url('daftar/contact') ; ?>">Contact</a></li>
+                        <li><a href="<?= base_url('about') ; ?>">About</a></li>
+                        <li><a href="<?= base_url('contact') ; ?>">Contact</a></li>
                     </ul>
                 </div>
                 <div class="nav-footer">
                     <button><i class="fa fa-bars"></i></button>
                 </div>
-            </div>
-            <div class="search-box pull-right">
-                <form action="#">
-                    <input type="text" placeholder="Search...">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
             </div>
         </div>
     </nav> <!-- /.mainmenu-area -->
@@ -180,6 +188,7 @@
 
     <!-- thm custom script -->
     <script src="<?= base_url() ; ?>/assets/vendor/main_html/js/custom.js"></script>
+    <script src="<?= base_url() ; ?>/assets/js/jquery.fancybox.js?v=2.1.5"></script>
 
     <script>
     $('.page-scroll').on('click', function(e) {
@@ -196,7 +205,7 @@
 
         $('html').animate({
             scrollTop: elemenTujuan.offset().top - 50
-        }, 2000, 'easeOutBounce');
+        }, 1000, 'easeOutBounce');
 
         e.preventDefault();
 

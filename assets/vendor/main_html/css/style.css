@@ -3371,6 +3371,8 @@ img {
 .donation-form-outer input[type="tel"],
 .donation-form-outer input[type="url"],
 .donation-form-outer input[type="password"],
+.donation-form-outer input[type="date"],
+.donation-form-outer input[type="number"],
 .donation-form-outer select,
 .donation-form-outer textarea {
 	position:relative;
