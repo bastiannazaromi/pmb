@@ -2,6 +2,17 @@
     <div class="container">
 
         <div class="donation-form-outer" style="background-color: white;">
+
+
+
+            <?php if ($this->session->flashdata('flash-error')) : ?>
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <?= $this->session->flashdata('flash-error') ; ?>
+            </div>
+            <?php endif ; ?>
+
             <!--Form Portlet-->
             <div class="row">
                 <div class="col-xl-12">
@@ -19,106 +30,176 @@
                                             name="<?php echo $this->security->get_csrf_token_name(); ?>"
                                             value="<?php echo $this->security->get_csrf_hash(); ?>" id="csrf_token">
 
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">NIK <span class="required">*</span></div>
-                                            <input type="text" class="form-control" required placeholder="NIK"
-                                                name="nik" maxlength="16">
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Nama <span class="required">*</span></div>
-                                            <input type="text" class="form-control" required placeholder="Nama lengkap"
-                                                name="nama" style="text-transform:uppercase">
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Tempat Lahir <span class="required">*</span>
-                                            </div>
-                                            <input type="text" class="form-control" required placeholder="Tanggal lahir"
-                                                name="tempat" style="text-transform:uppercase">
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Tanggal Lahir <span class="required">*</span>
-                                            </div>
-                                            <input type="date" class="form-control" id="tgl_lahir" required
-                                                name="tgl_lahir">
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Agama <span class="required">*</span></div>
-                                            <select class="form-control" name="agama">
-                                                <option value="">-- Pilih Agama --</option>
-                                                <option value="ISLAM">ISLAM</option>
-                                                <option value="KRISTEN PROTESTAN">KRISTEN PROTESTAN</option>
-                                                <option value="KRISTEN KATOLIK">KRISTEN KATOLIK</option>
-                                                <option value="HINDU">HINDU</option>
-                                                <option value="BUDDHA">BUDDHA</option>
-                                                <option value="KONGHUCHU">KONGHUCHU </option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Jenis Kelamin <span class="required">*</span></div>
-                                            <select class="form-control" name="jk">
-                                                <option value="">-- Pilih Jenis Kelamin --</option>
-                                                <option value="LAKI - LAKI">LAKI - LAKI</option>
-                                                <option value="PEREMPUAN">PEREMPUAN</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Status <span class="required">*</span></div>
-                                            <select class="form-control" name="status">
-                                                <option value="">-- Pilih Status --</option>
-                                                <option value="LAJANG">LAJANG</option>
-                                                <option value="MENIKAH">MENIKAH</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Jenis Tinggal <span class="required">*</span></div>
-                                            <select class="form-control" name="jns_tinggal">
-                                                <option value="">-- Pilih Jenis Tinggal --</option>
-                                                <option value="Bersama Orang Tua">Bersama Orang Tua</option>
-                                                <option value="Wali">Wali</option>
-                                                <option value="Kost">Kost</option>
-                                                <option value="Asrama">Asrama</option>
-                                                <option value="Panti Asuhan">Panti Asuhan</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">No. Telpon / Whatsapp <span
-                                                    class="required">*</span>
-                                            </div>
-                                            <input type="number" class="form-control" required placeholder="No. Telepon"
-                                                maxlength="14" name="no_hp">
-                                        </div>
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Email <span class="required">*</span></div>
-                                            <input type="email" class="form-control" required placeholder="Email"
-                                                name="email">
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Alamat <span class="required">*</span></div>
-                                            <textarea required class="form-control" name="alamat"
-                                                style="height: 150px;"></textarea>
-                                        </div>
-
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Penerima KPS <span class="required">*</span></div>
+                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
                                             <div class="row">
-                                                <div class="col-lg-3">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="kps" value="Ya">Ya
-                                                    </label>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <div class="field-label">NIK <span class="required">*</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" required
+                                                            placeholder="NIK" name="nik" maxlength="16"
+                                                            value="<?= set_value('nik') ; ?>">
+                                                        <?= form_error('nik', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Nama <span class="required">*</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" required
+                                                            placeholder="Nama lengkap" name="nama"
+                                                            style="text-transform:uppercase"
+                                                            value="<?= set_value('nama') ; ?>">
+                                                        <?= form_error('nama', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Tempat Lahir <span
+                                                                class="required">*</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" required
+                                                            placeholder="Tanggal lahir" name="tempat"
+                                                            style="text-transform:uppercase"
+                                                            value="<?= set_value('tempat') ; ?>">
+                                                        <?= form_error('tempat', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Tanggal Lahir <span
+                                                                class="required">*</span>
+                                                        </div>
+                                                        <input type="date" class="form-control" id="tgl_lahir" required
+                                                            name="tgl_lahir" value="<?= set_value('tgl_lahir') ; ?>">
+                                                        <?= form_error('tgl_lahir', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Agama <span class="required">*</span>
+                                                        </div>
+                                                        <select class="form-control" name="agama">
+                                                            <option value="">-- Pilih Agama --</option>
+                                                            <option value="ISLAM"
+                                                                <?= set_value('agama') == 'ISLAM' ? 'selected="selected"' : ''; ?>>
+                                                                ISLAM</option>
+                                                            <option value="KRISTEN PROTESTAN"
+                                                                <?= set_value('agama') == 'KRISTEN PROTESTAN' ? 'selected="selected"' : ''; ?>>
+                                                                KRISTEN PROTESTAN</option>
+                                                            <option value="KRISTEN KATOLIK"
+                                                                <?= set_value('agama') == 'KRISTEN KATOLIK' ? 'selected="selected"' : ''; ?>>
+                                                                KRISTEN KATOLIK</option>
+                                                            <option value="HINDU"
+                                                                <?= set_value('agama') == 'HINDU' ? 'selected="selected"' : ''; ?>>
+                                                                HINDU</option>
+                                                            <option value="BUDDHA"
+                                                                <?= set_value('agama') == 'BUDDHA' ? 'selected="selected"' : ''; ?>>
+                                                                BUDDHA</option>
+                                                            <option value="KONGHUCHU"
+                                                                <?= set_value('agama') == 'KONGHUCHU' ? 'selected="selected"' : ''; ?>>
+                                                                KONGHUCHU </option>
+                                                        </select>
+                                                        <?= form_error('agama', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Alamat <span class="required">*</span>
+                                                        </div>
+                                                        <textarea required class="form-control" name="alamat"
+                                                            style="height: 150px;"><?= set_value('alamat') ; ?></textarea>
+                                                        <?= form_error('alamat', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
                                                 </div>
-                                                <div class="col-lg-3">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" name="kps" value="Tidak" checked>TIdak
-                                                    </label>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <div class="field-label">Jenis Kelamin <span
+                                                                class="required">*</span></div>
+                                                        <select class="form-control" name="jk">
+                                                            <option value="">-- Pilih Jenis Kelamin --</option>
+                                                            <option value="LAKI - LAKI"
+                                                                <?= set_value('jk') == 'LAKI - LAKI' ? 'selected="selected"' : ''; ?>>
+                                                                LAKI - LAKI</option>
+                                                            <option value="PEREMPUAN"
+                                                                <?= set_value('jk') == 'PEREMPUAN' ? 'selected="selected"' : ''; ?>>
+                                                                PEREMPUAN</option>
+                                                        </select>
+                                                        <?= form_error('jk', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Status <span class="required">*</span>
+                                                        </div>
+                                                        <select class="form-control" name="status">
+                                                            <option value="">-- Pilih Status --</option>
+                                                            <option value="LAJANG"
+                                                                <?= set_value('status') == 'LAJANG' ? 'selected="selected"' : ''; ?>>
+                                                                LAJANG</option>
+                                                            <option value="MENIKAH"
+                                                                <?= set_value('status') == 'MENIKAH' ? 'selected="selected"' : ''; ?>>
+                                                                MENIKAH</option>
+                                                        </select>
+                                                        <?= form_error('status', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Tempat Tinggal <span
+                                                                class="required">*</span></div>
+                                                        <select class="form-control" name="jns_tinggal">
+                                                            <option value="">-- Pilih Tempat Tinggal --</option>
+                                                            <option value="Bersama Orang Tua"
+                                                                <?= set_value('jns_tinggal') == 'Bersama Orang Tua' ? 'selected="selected"' : ''; ?>>
+                                                                Bersama Orang Tua</option>
+                                                            <option value="Wali"
+                                                                <?= set_value('jns_tinggal') == 'Wali' ? 'selected="selected"' : ''; ?>>
+                                                                Wali</option>
+                                                            <option value="Kost"
+                                                                <?= set_value('jns_tinggal') == 'Kost' ? 'selected="selected"' : ''; ?>>
+                                                                Kost</option>
+                                                            <option value="Asrama"
+                                                                <?= set_value('jns_tinggal') == 'Asrama' ? 'selected="selected"' : ''; ?>>
+                                                                Asrama</option>
+                                                            <option value="Panti Asuhan"
+                                                                <?= set_value('jns_tinggal') == 'Panti Asuhan' ? 'selected="selected"' : ''; ?>>
+                                                                Panti Asuhan</option>
+                                                        </select>
+                                                        <?= form_error('jns_tinggal', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">No. Telpon / Whatsapp <span
+                                                                class="required">*</span>
+                                                        </div>
+                                                        <input type="number" class="form-control" required
+                                                            placeholder="No. Telepon" maxlength="14" name="no_hp"
+                                                            value="<?= set_value('no_hp') ; ?>">
+                                                        <?= form_error('no_hp', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="field-label">Email <span class="required">*</span>
+                                                        </div>
+                                                        <input type="email" class="form-control" required
+                                                            placeholder="Email" name="email"
+                                                            value="<?= set_value('email') ; ?>">
+                                                        <?= form_error('email', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Penerima KPS <span
+                                                                class="required">*</span></div>
+                                                        <div class="row">
+                                                            <div class="col-lg-3">
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="kps" value="Ya"
+                                                                        <?= set_value('kps') == 'Ya' ? 'checked' : ''; ?>>Ya
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="kps" value="Tidak"
+                                                                        <?= set_value('kps') == 'Tidak' ? 'checked' : ''; ?>>TIdak
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <?= form_error('kps', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,40 +214,66 @@
                                 <div class="form-portlet donation-form-outer" style="background-color: white;">
                                     <div class="row clearfix">
 
-                                        <div class="form-group col-lg-4 col-md-6 col-xs-12">
-                                            <div class="field-label">Nama Sekolah <span class="required">*</span></div>
-                                            <input type="text" class="form-control" required placeholder="Nama Sekolah"
-                                                name="nama_sekolah" style="text-transform:uppercase">
-                                        </div>
+                                        <div class="form-group col-lg-12 col-md-12 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <div class="field-label">Nama Sekolah <span
+                                                                class="required">*</span></div>
+                                                        <input type="text" class="form-control" required
+                                                            placeholder="Nama Sekolah" name="nama_sekolah"
+                                                            style="text-transform:uppercase"
+                                                            value="<?= set_value('nama_sekolah') ; ?>">
+                                                        <?= form_error('nama_sekolah', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
 
-                                        <div class="form-group col-lg-4 col-md-6 col-xs-12">
-                                            <div class="field-label">Provinsi <span class="required">*</span></div>
-                                            <select class="form-control" name="provinsi" id="provinsi">
-                                                <option value="">-- Pilih Provinsi --</option>
-                                                <?php foreach($provinsi as $hasil) : ?>
-                                                <option data-id_prov="<?= $hasil['id_prov'] ; ?>"
-                                                    value="<?= $hasil['nama'] ; ?>"><?= $hasil['nama'] ; ?></option>
-                                                <?php endforeach ; ?>
-                                            </select>
-                                        </div>
+                                                    <div class="form-group">
+                                                        <div class="field-label">Provinsi <span
+                                                                class="required">*</span></div>
+                                                        <select class="form-control" name="provinsi" id="provinsi">
+                                                            <option value="">-- Pilih Provinsi --</option>
+                                                            <?php foreach($provinsi as $hasil) : ?>
+                                                            <option value="<?= $hasil->id_prov ; ?>"
+                                                                <?= set_value('provinsi') == $hasil->id_prov ? 'selected="selected"' : ''; ?>>
+                                                                <?= $hasil->nama ; ?>
+                                                            </option>
+                                                            <?php endforeach ; ?>
+                                                        </select>
+                                                        <?= form_error('provinsi', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
 
-                                        <div class="form-group col-lg-4 col-md-6 col-xs-12">
-                                            <div class="field-label">Kab / Kota <span class="required">*</span></div>
-                                            <select class="form-control" name="kab_kota" id="kab_kota">
-                                                <option value="">-- Pilih Kab / Kota --</option>
-                                            </select>
-                                        </div>
+                                                    <div class="form-group">
+                                                        <div class="field-label">Kab / Kota <span
+                                                                class="required">*</span></div>
+                                                        <select class="form-control" name="kab_kota" id="kab_kota">
+                                                            <option value="">-- Pilih Kab / Kota --</option>
+                                                        </select>
+                                                        <?= form_error('kab_kota', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
 
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Jurusan <span class="required">*</span></div>
-                                            <input type="text" class="form-control" required placeholder="Jurusan"
-                                                name="jurusan">
-                                        </div>
+                                                </div>
 
-                                        <div class="form-group col-lg-6 col-md-6 col-xs-12">
-                                            <div class="field-label">Tahun Lulus <span class="required">*</span></div>
-                                            <input type="number" class="form-control" required placeholder="Tahun Lulus"
-                                                id="tahun_lulus" name="tahun_lulus">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <div class="field-label">Jurusan <span class="required">*</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" required
+                                                            placeholder="Jurusan" name="jurusan"
+                                                            value="<?= set_value('jurusan') ; ?>">
+                                                        <?= form_error('jurusan', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="field-label">Tahun Lulus <span
+                                                                class="required">*</span></div>
+                                                        <input type="number" class="form-control" required
+                                                            placeholder="Tahun Lulus" id="tahun_lulus"
+                                                            name="tahun_lulus"
+                                                            value="<?= set_value('tahun_lulus') ; ?>">
+                                                        <?= form_error('tahun_lulus', '<small class="text-danger">', '</small>'); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -186,13 +293,16 @@
                                                     <div class="field-label">Program Studi <span
                                                             class="required">*</span>
                                                     </div>
-                                                    <select class="form-control" name="provinsi" id="provinsi">
+                                                    <select class="form-control" name="prodi" id="prodi">
                                                         <option>-- Pilih Program Studi --</option>
                                                         <?php foreach($prodi as $hasil) : ?>
-                                                        <option value="<?= $hasil['nama'] ; ?>"><?= $hasil['nama'] ; ?>
+                                                        <option value="<?= $hasil->kd_prodi ; ?>"
+                                                            <?= set_value('prodi') == $hasil->kd_prodi ? 'selected="selected"' : ''; ?>>
+                                                            <?= $hasil->nama ; ?>
                                                         </option>
                                                         <?php endforeach ; ?>
                                                     </select>
+                                                    <?= form_error('prodi', '<small class="text-danger">', '</small>'); ?>
                                                 </div>
 
                                             </div>
@@ -213,20 +323,28 @@
                                                     <div class="row">
                                                         <div class="col-lg-4">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="kelas" checked>Regular ( Pagi
+                                                                <input type="radio" name="kelas" value="1"
+                                                                    <?= set_value('kelas') == '1' ? 'checked' : ''; ?>>Regular
+                                                                (
+                                                                Pagi
                                                                 )
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="kelas">Regular ( Malam )
+                                                                <input type="radio" name="kelas" value="2"
+                                                                    <?= set_value('kelas') == '2' ? 'checked' : ''; ?>>Regular
+                                                                (
+                                                                Malam )
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <label class="radio-inline">
-                                                                <input type="radio" name="kelas">Konversi
+                                                                <input type="radio" name="kelas" value="3"
+                                                                    <?= set_value('kelas') == '3' ? 'checked' : ''; ?>>Konversi
                                                             </label>
                                                         </div>
+                                                        <?= form_error('kelas', '<small class="text-danger">', '</small>'); ?>
                                                     </div>
                                                 </div>
 
@@ -249,27 +367,46 @@
                                                             class="required">*</span>
                                                     </div>
                                                     <select class="form-control" name="sumber_info" id="provinsi">
-                                                        <option>-- Sumber Informasi --</option>
-                                                        <option value="Iklan Koran">Iklan Koran
+                                                        <option value="">-- Sumber Informasi --</option>
+                                                        <option value="Iklan Koran"
+                                                            <?= set_value('sumber_info') == 'Iklan Koran' ? 'selected="selected"' : ''; ?>>
+                                                            Iklan Koran
                                                         </option>
-                                                        <option value="Iklan Radio">Iklan Radio
+                                                        <option value="Iklan Radio"
+                                                            <?= set_value('sumber_info') == 'Iklan Radio' ? 'selected="selected"' : ''; ?>>
+                                                            Iklan Radio
                                                         </option>
-                                                        <option value="Teman Mahasiswa PHB">Teman Mahasiswa PHB
+                                                        <option value="Teman Mahasiswa PHB"
+                                                            <?= set_value('sumber_info') == 'Teman Mahasiswa PHB' ? 'selected="selected"' : ''; ?>>
+                                                            Teman Mahasiswa PHB
                                                         </option>
-                                                        <option value="Teman Non Mahasiswa PHB">Teman Non Mahasiswa PHB
+                                                        <option value="Teman Non Mahasiswa PHB"
+                                                            <?= set_value('sumber_info') == 'Teman Non Mahasiswa PHB' ? 'selected="selected"' : ''; ?>>
+                                                            Teman Non Mahasiswa PHB
                                                         </option>
-                                                        <option value="Kelauarga Civitas PHB">Kelauarga Civitas PHB
+                                                        <option value="Keluarga Civitas PHB"
+                                                            <?= set_value('sumber_info') == 'Keluarga Civitas PHB' ? 'selected="selected"' : ''; ?>>
+                                                            Kelauarga Civitas PHB
                                                         </option>
-                                                        <option value="Keluarga Non Civitas PHB">Keluarga Non Civitas
+                                                        <option value="Keluarga Non Civitas PHB"
+                                                            <?= set_value('sumber_info') == 'Keluarga Non Civitas PHB' ? 'selected="selected"' : ''; ?>>
+                                                            Keluarga Non Civitas
                                                             PHB
                                                         </option>
-                                                        <option value="Media Sosial">Teman Non Mahasiswa PHB
+                                                        <option value="Media Sosial"
+                                                            <?= set_value('sumber_info') == 'Media Sosial' ? 'selected="selected"' : ''; ?>>
+                                                            Teman Non Mahasiswa PHB
                                                         </option>
-                                                        <option value="Baliho / Spanduk">Baliho / Spanduk
+                                                        <option value="Baliho / Spanduk"
+                                                            <?= set_value('sumber_info') == 'Baliho / Spanduk' ? 'selected="selected"' : ''; ?>>
+                                                            Baliho / Spanduk
                                                         </option>
-                                                        <option value="Guru SLTA">Guru SLTA
+                                                        <option value="Guru SLTA"
+                                                            <?= set_value('sumber_info') == 'Guru SLTA' ? 'selected="selected"' : ''; ?>>
+                                                            Guru SLTA
                                                         </option>
                                                     </select>
+                                                    <?= form_error('sumber_info', '<small class="text-danger">', '</small>'); ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -323,7 +460,6 @@ $(document).ready(function() {
 
     $(check_tidak_ada).each(function(i) {
         $(check_tidak_ada[i]).click(function() {
-            console.log(i);
 
             if (i == 0) {
                 if ($(this).is(":checked")) {
@@ -377,7 +513,7 @@ $(document).ready(function() {
         let csrfName = $("#csrf_token").attr('name');
         let csrfHash = $("#csrf_token").val();
 
-        let id_prov = $(this).find(':selected').data('id_prov');
+        let id_prov = $(this).val();
 
         let dataJson = {
             [csrfName]: csrfHash,
@@ -396,7 +532,7 @@ $(document).ready(function() {
                 let kabupaten = [];
                 option.push('<option value="">-- Pilih Kab / Kota --</option>');
                 $(result.kabupaten).each(function(i) {
-                    option.push('<option value="' + result.kabupaten[i].nama +
+                    option.push('<option value="' + result.kabupaten[i].id_kab +
                         '">' +
                         result.kabupaten[i].nama + '</option>');
                 });

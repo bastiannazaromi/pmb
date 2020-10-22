@@ -66,8 +66,20 @@
                         <li><a href="<?= base_url('contact') ; ?>">Contact</a></li>
                     </ul>
                 </div>
+
                 <div class="nav-footer">
                     <button><i class="fa fa-bars"></i></button>
+                </div>
+            </div>
+            <div class="navigation pull-right">
+                <div class="nav-header">
+                    <ul>
+                        <?php if (empty($this->session->userdata('log_user'))) : ?>
+                        <li><a href="<?= base_url('dashboard/login') ; ?>">Login</a></li>
+                        <?php else : ?>
+                        <li><a href="<?= base_url('dashboard/logout') ; ?>">Logout</a></li>
+                        <?php endif ; ?>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -193,15 +205,8 @@
     <script>
     $('.page-scroll').on('click', function(e) {
 
-        // 
         var tujuan = $(this).attr('href');
-        // tangkap element ybs
         var elemenTujuan = $(tujuan);
-        // console.log(elemenTujuan.offset().top);
-
-        // console.log($('html').scrollTop());
-
-        // $('body').scrollTop(elemenTujuan.offset().top);
 
         $('html').animate({
             scrollTop: elemenTujuan.offset().top - 50

@@ -12,3 +12,9 @@ $route['contact'] = 'daftar/contact';
 
 $route['pendaftaran/kabupaten'] = 'daftar/form_daftar';
 $route['pendaftaran/submit'] = 'daftar/form_daftar';
+
+$route['dashboard/login'] = 'login';
+$route['dashboard/login/proses'] = 'login/proses';
+$route['dashboard/logout'] = 'login/logout';
+
+$route['dashboard'] = 'mahasiswa';
