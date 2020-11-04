@@ -301,3 +301,62 @@
         </div>
     </div>
 </div>
+
+
+<script>
+let check_tidak_ada = $('.check_tidak_ada');
+let check_ada_1 = $('.check_ada_1');
+let check_ada_2 = $('.check_ada_2');
+let check_ada_3 = $('.check_ada_3');
+
+$(check_tidak_ada).each(function(i) {
+    $(check_tidak_ada[i]).click(function() {
+
+        if (i == 0) {
+            if ($(this).is(":checked")) {
+                $(check_ada_1).prop("checked", false);
+            } else {
+                $(check_ada_1).prop("checked", false);
+            }
+        } else if (i == 1) {
+            if ($(this).is(":checked")) {
+                $(check_ada_2).prop("checked", false);
+            } else {
+                $(check_ada_2).prop("checked", false);
+            }
+        } else {
+            if ($(this).is(":checked")) {
+                $(check_ada_3).prop("checked", false);
+            } else {
+                $(check_ada_3).prop("checked", false);
+            }
+        }
+
+
+    });
+});
+
+$(check_ada_1).click(function() {
+    if ($(this).is(":checked")) {
+        $(check_tidak_ada[0]).prop("checked", false);
+    } else {
+        $(check_tidak_ada[0]).prop("checked", false);
+    }
+});
+
+$(check_ada_2).click(function() {
+    if ($(this).is(":checked")) {
+        $(check_tidak_ada[1]).prop("checked", false);
+    } else {
+        $(check_tidak_ada[1]).prop("checked", false);
+    }
+});
+
+$(check_ada_3).click(function() {
+    if ($(this).is(":checked")) {
+        $(check_tidak_ada[2]).prop("checked", false);
+    } else {
+        $(check_tidak_ada[2]).prop("checked", false);
+    }
+});
+</script>

@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="Thu, 19 Nov 1900 08:52:00 GMT">
+
+    <link rel="shortcut icon" href="<?= base_url('assets/poltek.ico'); ?>">
+
     <!--Loading bootstrap css-->
     <link type="text/css"
         href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800">
@@ -70,33 +73,7 @@
     <script src="<?= base_url() ; ?>/assets/admin/js/respond.min.js"></script>
     <script src="<?= base_url() ; ?>/assets/admin/vendors/iCheck/icheck.min.js"></script>
     <script src="<?= base_url() ; ?>/assets/admin/vendors/iCheck/custom.min.js"></script>
-    <script>
-    //BEGIN CHECKBOX & RADIO
-    $('input[type="checkbox"]').iCheck({
-        checkboxClass: 'icheckbox_minimal-grey',
-        increaseArea: '20%' // optional
-    });
-    $('input[type="radio"]').iCheck({
-        radioClass: 'iradio_minimal-grey',
-        increaseArea: '20%' // optional
-    });
-    //END CHECKBOX & RADIO
-    </script>
-    <script type="text/javascript">
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-145464-12', 'auto');
-    ga('send', 'pageview');
-    </script>
+
 </body>
 
 </html>

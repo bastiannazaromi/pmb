@@ -35,20 +35,31 @@ class M_Universal extends CI_Model
         return ($this->db->insert($tabel, $data)) ? true : false ;
     }
 
+    public function insert_batch($data, $tabel)
+    {
+        return ($this->db->insert_batch($tabel, $data)) ? true : false ;
+    }
+
     public function delete($where, $tabel)
     {
         return ($this->db->where($where)->delete($tabel)) ? true : false ;
     }
 
-    public function getOrderBy($where, $tabel, $order)
+    public function getOrderBy($where, $tabel, $order, $urutan, $limit)
     {
         if (!empty($where)) {
             $this->db->where($where);
         }
+        if (!empty($urutan)) {
+            $this->db->order_by($order, $urutan);
+        }
         $this->db->order_by($order);
+        if (!empty($limit)) {
+            $this->db->limit($limit);
+        }
+        
         $data = $this->db->get($tabel)->result();
         return (count( (array)$data) > 0) ? $data : false;
     }
-
 
 }

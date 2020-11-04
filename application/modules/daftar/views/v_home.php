@@ -128,6 +128,43 @@
     </div>
 </section>
 
+<section class="recent-causes sec-padding" id="about">
+    <div class="container">
+        <div class="sec-title text-center">
+            <h2>ABOUT</h2>
+            <span class="decor"><span class="inner"></span></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <div class="causes sm-col5-center">
+                    <div class="causes-details clearfix">
+                        <?php foreach ($prodi as $hasil) : ?>
+                        <p class="event-title"><a href="#" class="info-prodi" style="color: black;"
+                                data-kd_prodi="<?= enkrip($hasil->kd_prodi) ; ?>"><?= $hasil->nama ; ?></a></p>
+                        <?php endforeach ; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <div class="causes sm-col5-center">
+                    <div class="causes-details clearfix">
+                        <h3 class="deskripsiProdi"></h3>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni placeat veniam temporibus
+                            similique itaque dicta fuga. Voluptas qui corrupti ab earum quae facilis minus, libero iste
+                            magnam reprehenderit corporis ex maiores iure natus. Placeat odio, accusantium tenetur illum
+                            unde quia corrupti alias temporibus sequi eos quos, iusto laudantium sapiente ipsum cum
+                            provident eum doloribus est at! Nemo, eligendi id ex reprehenderit blanditiis error tenetur
+                            suscipit eum facilis asperiores et ipsam molestiae necessitatibus. Necessitatibus hic fugit
+                            repellendus maxime facilis? Fugit maiores repudiandae architecto quasi accusantium eos
+                            aliquid pariatur, velit harum, dignissimos vitae alias cum, adipisci numquam sunt mollitia
+                            porro id totam!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <script src="<?= base_url() ; ?>/assets/vendor/main_html/js/jquery-1.11.1.min.js"></script>
 
 <script>

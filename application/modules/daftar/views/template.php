@@ -57,13 +57,14 @@
                 <div class="nav-header">
                     <ul>
                         <li>
-                            <a href="<?= base_url('home') ; ?>">Home</a>
+                            <a href="<?= base_url('home') ; ?>"><i class="fa fa-home"></i></a>
                         </li>
                         <li>
                             <a href="<?= base_url('pendaftaran') ; ?>">Pendaftaran</a>
                         </li>
-                        <li><a href="<?= base_url('about') ; ?>">About</a></li>
-                        <li><a href="<?= base_url('contact') ; ?>">Contact</a></li>
+                        <li><a href="<?= base_url('dashboard') ; ?>">Dashboard</a></li>
+                        <li><a href="#about" class="page-scroll">About</a></li>
+                        <li><a href="#contact" class="page-scroll">Contact</a></li>
                     </ul>
                 </div>
 
@@ -87,7 +88,7 @@
 
     <?php $this->load->view($page); ?>
 
-    <footer class="footer sec-padding">
+    <footer class="footer sec-padding" id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-sm-6">

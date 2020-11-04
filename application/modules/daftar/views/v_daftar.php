@@ -3,8 +3,6 @@
 
         <div class="donation-form-outer" style="background-color: white;">
 
-
-
             <?php if ($this->session->flashdata('flash-error')) : ?>
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
@@ -114,11 +112,11 @@
                                                                 class="required">*</span></div>
                                                         <select class="form-control" name="jk">
                                                             <option value="">-- Pilih Jenis Kelamin --</option>
-                                                            <option value="LAKI - LAKI"
-                                                                <?= set_value('jk') == 'LAKI - LAKI' ? 'selected="selected"' : ''; ?>>
+                                                            <option value="L"
+                                                                <?= set_value('jk') == 'L' ? 'selected="selected"' : ''; ?>>
                                                                 LAKI - LAKI</option>
-                                                            <option value="PEREMPUAN"
-                                                                <?= set_value('jk') == 'PEREMPUAN' ? 'selected="selected"' : ''; ?>>
+                                                            <option value="P"
+                                                                <?= set_value('jk') == 'P' ? 'selected="selected"' : ''; ?>>
                                                                 PEREMPUAN</option>
                                                         </select>
                                                         <?= form_error('jk', '<small class="text-danger">', '</small>'); ?>
@@ -218,11 +216,17 @@
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
+                                                        <div class="field-label">NPSN Sekolah <span
+                                                                class="required">*</span></div>
+                                                        <input type="number" class="form-control" id="npsn" required
+                                                            placeholder="NPSN Sekolah" name="npsn_sekolah">
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="field-label">Nama Sekolah <span
                                                                 class="required">*</span></div>
                                                         <input type="text" class="form-control" required
-                                                            placeholder="Nama Sekolah" name="nama_sekolah"
-                                                            style="text-transform:uppercase"
+                                                            placeholder="Nama Sekolah" id="nama_sekolah"
+                                                            name="nama_sekolah" style="text-transform:uppercase"
                                                             value="<?= set_value('nama_sekolah') ; ?>">
                                                         <?= form_error('nama_sekolah', '<small class="text-danger">', '</small>'); ?>
                                                     </div>
@@ -538,6 +542,29 @@ $(document).ready(function() {
                 });
 
                 $('#kab_kota').html(option.join(''));
+            }
+        });
+    });
+
+    $('#npsn').change(function() {
+        let csrfName = $("#csrf_token").attr('name');
+        let csrfHash = $("#csrf_token").val();
+
+        let npsn = $(this).val();
+
+        let dataJson = {
+            [csrfName]: csrfHash,
+            npsn: npsn
+        };
+
+        $.ajax({
+            url: "<?= base_url('pendaftaran/get_npsn'); ?>",
+            type: 'post',
+            dataType: 'json',
+            data: dataJson,
+            success: function(result) {
+                $("#csrf_token").val(result.token);
+                $("#nama_sekolah").val(result.nama_sekolah);
             }
         });
     });

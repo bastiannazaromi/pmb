@@ -13,22 +13,21 @@ class Daftar extends CI_Controller
         $this->u4		= $this->uri->segment(4);
         $this->u5		= $this->uri->segment(5);
         $this->u6		= $this->uri->segment(6);
-
-        $this->load->model('M_Provinsi', 'provinsi');
-        $this->load->model('M_Kabupaten', 'kabupaten');
-        $this->load->model('M_Prodi', 'prodi');
-        $this->load->model('M_Penghasilan', 'penghasilan');
-        $this->load->model('M_KebKhusus', 'keb_khusus');
-        $this->load->model('M_CalonMhs', 'calonMhs');
+        
         $this->load->model('M_Universal', 'universal');
     }
     public function index()
     {
         $data['title'] = 'PMB POLITEKNIK HARAPAN BERSAMA';
         $data['page'] = 'v_home';
-        $data['slider'] = $this->universal->getOrderBy(['status' => 1], 'slider', 'urut');
-        $data['prodi'] = $this->universal->getOrderBy('', 'prodi', 'nama');
+        $data['slider'] = $this->universal->getOrderBy(['status' => 1], 'slider', 'urut', '', '');
+        $data['prodi'] = $this->universal->getOrderBy('', 'prodi', 'nama', '', '');
         
+        $this->template($data);
+    }
+
+    public function template($data = array())
+    {
         $this->load->view('template', $data);
     }
 
@@ -39,7 +38,7 @@ class Daftar extends CI_Controller
             if ($this->u2 == 'kabupaten')
             {
                 $id_prov = $this->input->post('id_prov', TRUE);
-                $data['kabupaten'] = $this->kabupaten->getKabupaten($id_prov);
+                $data['kabupaten'] = $this->universal->getOrderBy(['id_prov' => $id_prov], 'kabupaten', 'nama');
                 $data['token'] = $this->security->get_csrf_hash();
 
                 echo json_encode($data);
@@ -59,6 +58,7 @@ class Daftar extends CI_Controller
                 $this->form_validation->set_rules('jns_tinggal', 'Tempat Tinggal', 'required|min_length[4]');
                 $this->form_validation->set_rules('alamat', 'Alamat', 'required|min_length[10]');
                 $this->form_validation->set_rules('kps', 'KPS', 'required|trim|alpha|min_length[2]');
+                $this->form_validation->set_rules('npsn_sekolah', 'NPSN Sekolah', 'required|numeric|min_length[8]|max_length[8]');
                 $this->form_validation->set_rules('nama_sekolah', 'Nama Sekolah', 'required|min_length[8]');
                 $this->form_validation->set_rules('provinsi', 'Provinsi', 'required|numeric|max_length[2]');
                 $this->form_validation->set_rules('kab_kota', 'Kab / Kota', 'required|numeric|max_length[5]');
@@ -73,10 +73,19 @@ class Daftar extends CI_Controller
                     $data['page'] = 'v_daftar';
                     $data['provinsi'] = $this->universal->getOrderBy('', 'provinsi', 'nama');
                     $data['prodi'] = $this->universal->getOrderBy('', 'prodi', 'nama');
-                    $this->load->view('template', $data);
+                    $this->template($data);
                 } else {
 
                     $virtualAkun = $this->_getVirualToken(4);
+
+                    $virtualAkunBefore = $this->universal->getOne(['virtualAkun' => $virtualAkun], 'akun_mhs');
+
+                    while($virtualAkunBefore)
+                    {
+                        $virtualAkun = $this->_getVirualToken(4);
+                        $virtualAkunBefore = $this->universal->getOne(['virtualAkun' => $virtualAkun], 'akun_mhs');
+                    }
+        
                     $password = $this->_getPassword(8);
                     $akun = [
                         'virtualAkun'   => $virtualAkun,
@@ -98,6 +107,7 @@ class Daftar extends CI_Controller
                         'email'             => $this->input->post('email', TRUE),
                         'kps'               => $this->input->post('kps', TRUE),
                         'alamat'            => $this->input->post('alamat', TRUE),
+                        'npsn'              => $this->input->post('npsn_sekolah', TRUE),
                         'nama_sekolah'      => strtoupper($this->input->post('nama_sekolah', TRUE)),
                         'jurusan'           => $this->input->post('jurusan', TRUE),
                         'tahun_lulus'       => $this->input->post('tahun_lulus', TRUE),
@@ -106,7 +116,8 @@ class Daftar extends CI_Controller
                         'kab_kota'          => $this->input->post('kab_kota', TRUE),
                         'prodi'             => $this->input->post('prodi', TRUE),
                         'kelas'             => $this->input->post('kelas', TRUE),
-                        'sumber_info'       => $this->input->post('sumber_info', TRUE)
+                        'sumber_info'       => $this->input->post('sumber_info', TRUE),
+                        'foto'              => 'default.jpg'
                     ];
 
                     $insertAkun = $this->universal->insert($akun, 'akun_mhs');
@@ -127,7 +138,7 @@ class Daftar extends CI_Controller
                             $data['title'] = 'PMB POLITEKNIK HARAPAN BERSAMA';
                             $data['page'] = 'v_suksesDaftar';
                             $data['akun'] = $akun2;
-                            $this->load->view('template', $data);
+                            $this->template($data);
                         }
                         else{
                             $this->session->set_flashdata('flash-error', 'Pendafaran gagal !!');
@@ -148,7 +159,7 @@ class Daftar extends CI_Controller
             $data['page'] = 'v_daftar';
             $data['provinsi'] = $this->universal->getOrderBy('', 'provinsi', 'nama');
             $data['prodi'] = $this->universal->getOrderBy('', 'prodi', 'nama');
-            $this->load->view('template', $data);
+            $this->template($data);
         }
 
     }
@@ -157,13 +168,13 @@ class Daftar extends CI_Controller
     {
         $data['title'] = 'PMB POLITEKNIK HARAPAN BERSAMA';
         $data['page'] = 'v_about';
-        $this->load->view('template', $data);
+        $this->template($data);
     }
     public function contact()
     {
         $data['title'] = 'PMB POLITEKNIK HARAPAN BERSAMA';
         $data['page'] = 'v_contact';
-        $this->load->view('template', $data);
+        $this->template($data);
     }
 
     private function _getVirualToken($n) { 
@@ -211,7 +222,36 @@ class Daftar extends CI_Controller
         $data['title'] = 'PMB POLITEKNIK HARAPAN BERSAMA';
         $data['page'] = 'v_suksesDaftar';
         $data['akun'] = $akun;
-        $this->load->view('template', $data);
+        $this->template($data);
+    }
+
+    function get_npsn()
+    {
+        $npsn = $this->input->post('npsn', TRUE);
+        $url = "https://referensi.data.kemdikbud.go.id/tabs.php?npsn=" . $npsn;
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true]);
+        $get = curl_exec($ch);
+        $res = checkNPSN($get);
+        if ($res)
+        {
+            $sekolah = $res['nama'];
+        }
+        curl_close($ch);
+        if (!$res) {
+            $hasil = [
+                'npsn'              => $npsn,
+                'nama_sekolah'      => 'Sekolah tidak ditemunkan',
+                'token'             => $this->security->get_csrf_hash(),
+            ];
+        } else {
+            $hasil = [
+                'npsn'              => $npsn,
+                'nama_sekolah'      => $sekolah,
+                'token'             => $this->security->get_csrf_hash(),
+            ];
+        }
+        echo json_encode($hasil);
     }
 
 }
